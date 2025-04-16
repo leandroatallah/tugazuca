@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.ts"
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,8 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "openai": "^4.94.0",
+    "redis": "^4.7.0",
+    "redis-om": "^0.4.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
