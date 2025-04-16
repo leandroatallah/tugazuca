@@ -1,5 +1,5 @@
 import express from "express";
-import { getWordComparison } from "./ask.controller";
+import { getWordComparison } from "./ask.controller.js";
 
 const router = express.Router();
 

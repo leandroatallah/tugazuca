@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import fs from "fs/promises";
-import { DictionaryEntry } from "./ask.model";
-import openAIClient from "../services/openai";
+import { DictionaryEntry } from "./ask.model.js";
+import openAIClient from "../services/openai.js";
 import path from "path";
 
 export async function getWordComparison(req: Request, res: Response) {
