@@ -1,9 +1,9 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
-import { swaggerOptions } from "./swagger";
-import askRoutes from "../ask/ask.routes";
-import { createRedisClient } from "../services/redis";
+import { swaggerOptions } from "./swagger.js";
+import askRoutes from "../ask/ask.routes.js";
+import redis from "../services/redis.js";
 
 const router = express.Router();
 
@@ -14,7 +14,6 @@ router.get("/", swaggerUi.setup(swaggerDocs));
 
 // Redis ping
 router.get("/redis-ping", async (_, res) => {
-  const redis = await createRedisClient();
   const ping = await redis.ping();
   res.send(ping);
 });
