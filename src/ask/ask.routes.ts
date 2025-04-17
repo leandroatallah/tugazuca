@@ -3,29 +3,30 @@ import { getWordComparison } from "./ask.controller.js";
 
 const router = express.Router();
 
-// TODO: Replace mocked swagger config
 /**
  * @swagger
- * /ask/:term:
+ * /ask/{term}:
  *   get:
- *     summary: Retrieve a list of users
+ *     summary: Compare word usage between Brazilian and European Portuguese
+ *     parameters:
+ *       - in: path
+ *         name: term
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The word to compare
  *     responses:
  *       200:
- *         description: A list of users
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   name:
- *                     type: string
- *                     example: John Doe
+ *         description: Word comparison details
+ *       500:
+ *         description: Internal server error
  */
-router.get("/:term", getWordComparison);
+router.get("/:term", async (req, res) => {
+  try {
+    await getWordComparison(req, res);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 export default router;
