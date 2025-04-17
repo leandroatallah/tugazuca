@@ -12,6 +12,16 @@ export type DictionaryEntry = {
   notes: string;
 };
 
+export type DictionaryEntryEntity = Omit<
+  DictionaryEntry,
+  "brazil" | "portugal"
+> & {
+  "brazil.meaning": string;
+  "brazil.usage": string;
+  "portugal.meaning": string;
+  "portugal.usage": string;
+};
+
 export const DictionaryEntrySchema = new Schema(
   "DictionaryEntry",
   {

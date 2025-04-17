@@ -20,15 +20,15 @@ Qual o significado da palavra "rapariga"?
 
 <assistant_response>
 {
-  "palavra": "rapariga",
-  "brasil": {
-    "significado": "Gíria ofensiva que pode significar prostituta.",
-    "uso": "É usada de forma pejorativa em algumas regiões, especialmente no nordeste do Brasil."
+  "word": "rapariga",
+  "brazil": {
+    "meaning": "Gíria ofensiva que pode significar prostituta.",
+    "usage": "É usada de forma pejorativa em algumas regiões, especialmente no nordeste do Brasil."
   },
   "portugal": {
-    "significado": "Moça jovem ou garota.",
-    "uso": "É uma forma comum e neutra de se referir a uma jovem mulher."
+    "meaning": "Moça jovem ou garota.",
+    "usage": "É uma forma comum e neutra de se referir a uma jovem mulher."
   },
-  "observacoes": "Esta é uma palavra que pode causar mal-entendidos sérios. Um português pode usá-la normalmente, mas para um brasileiro, pode soar como um insulto."
+  "notes": "Esta é uma palavra que pode causar mal-entendidos sérios. Um português pode usá-la normalmente, mas para um brasileiro, pode soar como um insulto."
 }
 </assistant_response>
