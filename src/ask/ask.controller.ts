@@ -4,7 +4,20 @@ import path from "path";
 import { DictionaryEntry, DictionaryEntryEntity } from "./ask.model.js";
 import askRepository from "./ask.repository.js";
 import logger from "../services/logger.js";
+import redisClient from "../services/redis.js";
 import { openAiResponseCreate } from "../services/openai.js";
+import { config } from "../config/index.js";
+
+export class DictionaryError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string,
+    public readonly status: number = 500,
+  ) {
+    super(message);
+    this.name = "DictionaryError";
+  }
+}
 
 export async function getCacheEntryByWord(word: string) {
   try {
@@ -22,8 +35,12 @@ export async function getCacheEntryByWord(word: string) {
   }
 }
 
+// TODO: Check if is better move repository functions
 export async function createCacheEntry(data: DictionaryEntryEntity) {
-  return await askRepository.save(data);
+  const CACHE_TTL = config.redis.ttl;
+  const entry = await askRepository.save(data);
+  await redisClient.expire(entry.entityId, CACHE_TTL);
+  return entry;
 }
 
 function toEntityData(entry: DictionaryEntry): DictionaryEntryEntity {
@@ -86,6 +103,15 @@ export async function getWordComparison(req: Request, res: Response) {
 
     return res.json({ data: fromEntityFields(result) });
   } catch (error) {
-    throw new Error(`Failed to parse OpenAI response to JSON: ${error}`);
+    if (error instanceof DictionaryError) {
+      return res.status(error.status).json({
+        error: error.message,
+        code: error.code,
+      });
+    }
+    return res.status(500).json({
+      error: "Internal server error",
+      code: "INTERNAL_ERROR",
+    });
   }
 }

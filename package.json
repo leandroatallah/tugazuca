@@ -13,6 +13,8 @@
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
     "openai": "^4.94.0",
     "redis": "^4.7.0",
     "redis-om": "^0.4.7",
