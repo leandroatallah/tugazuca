@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import fs from "fs/promises";
 import path from "path";
-import { DictionaryEntry, DictionaryEntryEntity } from "./ask.model.js";
-import askRepository from "./ask.repository.js";
+import { DictionaryEntry, DictionaryEntryEntity } from "./dictionary.model.js";
+import dictionaryRepository from "./dictionary.repository.js";
 import logger from "../services/logger.js";
 import redisClient from "../services/redis.js";
 import { openAiResponseCreate } from "../services/openai.js";
@@ -21,7 +21,7 @@ export class DictionaryError extends Error {
 
 export async function getCacheEntryByWord(word: string) {
   try {
-    return await askRepository
+    return await dictionaryRepository
       .search()
       .where("word")
       .equals(word)
@@ -38,7 +38,7 @@ export async function getCacheEntryByWord(word: string) {
 // TODO: Check if is better move repository functions
 export async function createCacheEntry(data: DictionaryEntryEntity) {
   const CACHE_TTL = config.redis.ttl;
-  const entry = await askRepository.save(data);
+  const entry = await dictionaryRepository.save(data);
   await redisClient.expire(entry.entityId, CACHE_TTL);
   return entry;
 }
@@ -83,7 +83,10 @@ export async function getWordComparison(req: Request, res: Response) {
     // Request new entry from OpenAI
     logger.info("Request OpenAI API to create entry");
     const prompt = `Explique a palavra "${term}" comparando o português do Brasil e o português de Portugal. Dê exemplos e indique se o uso pode gerar mal-entendidos.`;
-    const promptPath = path.join(process.cwd(), "src/ask/ask.prompt.txt");
+    const promptPath = path.join(
+      process.cwd(),
+      "src/dictionary/dictionary.prompt.txt",
+    );
     const instructions = await fs.readFile(promptPath, "utf-8");
     const response = await openAiResponseCreate({
       instructions,

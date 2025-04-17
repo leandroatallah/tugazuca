@@ -2,7 +2,7 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import { swaggerOptions } from "./swagger.js";
-import askRoutes from "../ask/ask.routes.js";
+import dictionaryRoutes from "../dictionary/dictionary.routes.js";
 import redis from "../services/redis.js";
 
 const router = express.Router();
@@ -19,6 +19,6 @@ router.get("/redis-ping", async (_, res) => {
 });
 
 // Routes
-router.use("/ask", askRoutes);
+router.use("/ask", dictionaryRoutes);
 
 export default router;
