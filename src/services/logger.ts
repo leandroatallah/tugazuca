@@ -47,4 +47,8 @@ export default class logger {
   static error(...data: any[]): void {
     console.error(this.getMessage(LogStatus.ERROR, data));
   }
+
+  static trace(...data: any[]): void {
+    console.trace(this.getMessage(LogStatus.ERROR, data));
+  }
 }
