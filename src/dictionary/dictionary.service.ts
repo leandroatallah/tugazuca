@@ -10,6 +10,7 @@ export class DictionaryService {
 
   async getWordComparison(term: string): Promise<DictionaryEntry> {
     const cached = await this.repository.getCacheEntryByWord(term);
+    console.debug("DEBUG", cached);
     if (cached) {
       logger.info("Retrieve entry from cache");
       return cached;

@@ -136,3 +136,5 @@ dist
 .pnp.*
 
 dump.rdb
+
+.DS_Store
