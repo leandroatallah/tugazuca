@@ -39,6 +39,7 @@ export class DictionaryRepository {
       "brazil.usage": entry.brazil.usage,
       "portugal.meaning": entry.portugal.meaning,
       "portugal.usage": entry.portugal.usage,
+      similarity: entry.similarity,
       notes: entry.notes,
     };
   }
@@ -54,6 +55,7 @@ export class DictionaryRepository {
         meaning: entity["portugal.meaning"],
         usage: entity["portugal.usage"],
       },
+      similarity: entity.similarity,
       notes: entity.notes,
     };
   }

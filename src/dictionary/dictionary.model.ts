@@ -9,6 +9,7 @@ export type DictionaryEntry = {
   word: string;
   brazil: DictionaryLanguage;
   portugal: DictionaryLanguage;
+  similarity: "identical" | "similar" | "different" | "conflicting";
   notes: string;
 };
 
@@ -30,6 +31,7 @@ export const DictionaryEntrySchema = new Schema(
     "brazil.usage": { type: "string" },
     "portural.meaning": { type: "string" },
     "portural.usage": { type: "string" },
+    similarity: { type: "string" },
     notes: { type: "string" },
   },
   {
