@@ -4,6 +4,12 @@ import { config } from "../config/index.js";
 
 const client = await createClient({
   url: config.redis.url,
+  username: config.redis.username,
+  password: config.redis.password,
+  socket: {
+    host: config.redis.socket.host,
+    port: Number(config.redis.socket.port),
+  },
 })
   .on("error", (err) => logger.error("Redis Client Error", err))
   .connect()
